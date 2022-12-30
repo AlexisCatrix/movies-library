@@ -52,5 +52,8 @@
     "emojiFormat": "emoji",
     "scopePrompt": true,
     "gitmojisUrl": "https://gitmoji.dev/api/gitmojis"
+  },
+  "dependencies": {
+    "lodash.groupby": "^4.6.0"
   }
 }
