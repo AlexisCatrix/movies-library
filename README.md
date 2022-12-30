@@ -1,3 +1,6 @@
+# movies-library
+A movie library application built in Vue/Nuxt JS, allowing the retrieval of a list of movies based on certain criteria (IMDb like) 
+
 # Nuxt 3 Starter
 
 ## Features
