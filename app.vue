@@ -12,17 +12,11 @@ export default {
     return {
       activeYear: "",
       movies: moviesLibrary,
-      get movieFilter() {
-        const moviesYear = this.movies.map((movie) => movie.year);
-        const moviesFiltered = moviesYear
-          .filter((movie, index) => moviesYear.indexOf(movie) !== index)
-          .map((movie) => movie);
-
-        const moviesGroupedByYear = groupBy(
-          this.movies.filter((movie) => moviesFiltered.includes(movie.year)),
+      get moviesGroupedByYear() {
+        return groupBy(
+          this.movies.filter((movie) => movie.year),
           "year"
         );
-        return moviesGroupedByYear;
       },
     };
   },
@@ -40,9 +34,9 @@ export default {
 </script>
 
 <template>
-  <ul class="flex gap-8 p-8">
+  <ul class="mb-8 flex gap-8">
     <li
-      v-for="(movie, index) in movieFilter"
+      v-for="(movie, index) in moviesGroupedByYear"
       :key="index"
       class="card-component | flex justify-around gap-8 rounded-lg p-8"
       :class="{ 'active-year': movie[0].year === activeYear }"
@@ -53,7 +47,7 @@ export default {
   </ul>
   <div>
     <MoviesCard
-      v-for="(movie, index) in movieFilter"
+      v-for="(movie, index) in moviesGroupedByYear"
       :id="`movie-card-${movie[0].year}`"
       :key="index"
       :movies-list-by-year="movie"
@@ -63,6 +57,11 @@ export default {
 </template>
 
 <style>
+/* stylelint-disable-next-line selector-id-pattern */
+#__nuxt {
+  padding: 2rem;
+}
+
 .card-component {
   cursor: pointer;
 
@@ -70,7 +69,6 @@ export default {
   justify-content: center;
 
   width: 100%;
-  padding: 2rem;
 
   font-family: "Bebas Neue", cursive;
   font-size: 2rem;
@@ -78,9 +76,9 @@ export default {
   border: 2px solid black;
 }
 
-.card-component:hover,
 .card-component.active-year {
-  color: white;
-  background: linear-gradient(90deg, rgb(0 0 0 / 100%) 0%, rgb(48 154 223 / 100%) 100%);
+  color: black;
+  border: 2px solid rgb(36 123 166);
+  box-shadow: rgb(36 123 166) 0 0 10px 2px;
 }
 </style>
